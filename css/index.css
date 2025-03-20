@@ -1,0 +1,453 @@
+:root {
+    --dark: #444655;
+    --white: #f7f7f7;
+    --sharp-color: #E888DF;
+    --normal-spacing: 16px;
+    --content-padding: 10%;
+}
+
+html {
+    display: flex;
+    color: var(--dark);
+    scroll-behavior: smooth;
+    font-size: 16px;
+}
+
+body {
+    font-family: monospace;
+    margin: 0%;
+    background-color: var(--white);
+}
+
+a {
+    color: var(--dark);
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: var(--normal-spacing);
+}
+
+nav > ul > li {
+    margin: 0;
+    padding: 0;
+}
+
+nav > ul > li > a {
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    font-size: 0.8rem;
+    width: 3rem; /* Set a fixed width */
+    height: 3rem; /* Set a fixed height */
+}
+
+.bg {
+    position: absolute;
+    z-index: -1;
+    filter: brightness(0.7); /* Adjust the brightness */
+    mask-image: linear-gradient(var(--dark), transparent);
+}
+
+.bgimg {
+    width: 100%;
+}
+
+.modal{
+    position: fixed; /* Stay in place */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0,0,0,0.7); /* Black w/ opacity */
+    z-index: 1000;
+    display:none;
+}
+
+.modal-quiz{
+    background-color: var(--white);
+    margin: 15% auto;
+    padding: 20px;
+    width: 70%;
+    border-radius: 0.8rem;
+    height: fit-content;
+    justify-items: center;
+    position: relative;
+}
+.choices{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
+    width: 100%;
+}
+
+.btnGrp{
+    display: flex;
+    gap: 1rem;
+}
+
+.choice{
+    border: 1px solid var(--dark);
+    background: white;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    color: var(--dark);
+    text-align: center;
+    font-size: 1rem;
+    width: -webkit-fill-available;
+}
+
+.choice:hover{
+    background: var(--dark);
+    color: var(--white);
+}
+
+.choice.active{
+    background: var(--dark);
+    color: var(--white);
+}
+
+nav {
+    position: fixed;
+    bottom: 2%;
+    right: 2%;
+    text-align: center;
+    display: flex;
+    gap: var(--normal-spacing);
+    background: rgba(0, 0, 0, 0.5);
+    padding: 0.8rem;
+    border-radius: 0.5rem;
+    z-index: 900;
+}
+
+footer {
+    text-align: center;
+    margin: 15%;
+}
+
+h1.fixed-h1 {
+    position: fixed !important;
+    top: 0 !important;
+    font-size: 2rem !important;
+    text-shadow: none !important;
+}
+
+h2 {
+    margin: 0;
+}
+
+a:hover {
+    filter: brightness(0.5);
+}
+
+fieldset {
+    border: 0px;
+    display: flex;
+    flex-direction: column;
+    gap: var(--normal-spacing);
+    margin-top: var(--normal-spacing);
+    padding: 0%;
+    font-family: system-ui;
+}
+
+section {
+    min-height: 100vh;
+}
+
+#contactForm {
+    margin-bottom: 5rem;
+}
+
+.radioSet,
+.checkboxSet {
+    display: flow;
+}
+
+input#submit {
+    margin-top: var(--normal-spacing);
+    height: 3rem;
+    width: 45%;
+    border: 0px;
+    border-radius: 0.5rem;
+    background: #0066ff;
+    color: var(--white);
+}
+
+.content {
+    margin-top: var(--normal-spacing);
+}
+
+nav img {
+    width: 2rem;
+    height: 2rem;
+}
+
+a {
+    width: fit-content;
+    display: flex;
+}
+
+#topSection {
+    position: relative;
+    background-image: url('../img/IMG_9123.jpeg'); /* Adjust the path if necessary */
+    width: 100%;
+    height: 100vh; /* Full viewport height */
+    display: flex;
+    align-items: flex-end;;
+    justify-content: center;
+    color: var(--white);
+    text-align: center; /* Optional: to center text */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#topSection .content {
+    position: relative;
+    z-index: 1; /* Ensure content is above the background */
+    padding: 5%;
+    text-align: left;
+}
+
+#topSection::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Optional: to add a dark overlay for better text readability */
+    z-index: 0; /* Ensure overlay is below the content */
+}
+
+#topSection h1 {
+    position: sticky; /* Sticky within the #topSection */
+    top: 10%; /* Adjust the top offset */
+    z-index: 10; /* Ensure it stays above other content */
+    font-size: 5rem;
+    margin: 0;
+    font-family: cursive;
+    color: var(--sharp-color);
+    line-height: 5.5rem;
+    transition: position 0.3s ease-in-out; /* Smooth transition for position change */
+    text-shadow: 5px 2px 2px var(--dark);
+}
+
+.gallery-container {
+    max-width: 100vw;
+    margin-top: var(--content-padding);
+    padding-left: var(--content-padding);
+    padding-right: var(--content-padding);
+    padding-bottom: 2rem; /* Add padding to create space for the box-shadow */
+}
+
+.gallery {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: var(--normal-spacing);
+    margin-left: -5%;
+    margin-right: -5%;
+    overflow-x:scroll;
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+.galleryImg img {
+    width: 100%;
+    height: 80%;
+    object-fit: cover; /* Ensure the image covers the container without distortion */
+    object-position: center; /* Center the image within the container */
+    display: block;
+    border-radius: 0.8rem 0.8rem 0 0;
+    max-width: 400px;
+}
+
+.galleryImg h4 {
+    padding-left: 1rem;
+    padding-right: 0.5rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    font-family: 'Inter';
+}
+
+.galleryImg {
+    object-fit: cover;
+    object-position: center;
+    flex: 0 0 auto; /* Prevent images from shrinking */
+    scroll-snap-align: start; /* Optional: for snap scrolling */
+    border-radius: 0.8rem;
+    position: relative;
+    border: #44465520 0.5px solid;
+    transition: filter 0.5s ease-in-out;
+    box-shadow: rgba(var(--dark), 0.50) 0px 30px 30px 0px;
+    margin-bottom: 2rem; /* Add margin to create space for the box-shadow */
+    width: fit-content;
+}
+
+.galleryImg:hover img {
+    filter: brightness(0.6); /* Dim the image on hover */
+}
+
+.galleryImg:hover .hoverOverlay {
+    opacity: 1; /* Show overlay on hover */
+}
+
+.destinationGallery{
+    display: flex;
+    overflow-x: scroll;
+    gap: 1rem;
+}
+
+.text-content {
+    /* Optional: to center text */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: var(--normal-spacing);
+    margin-top: var(--content-padding);
+    padding-left: var(--content-padding);
+    padding-right: var(--content-padding);
+    max-width: calc(70% - var(--content-padding));
+}
+
+.topBtn{
+    margin-top: 3rem;
+    font-size: 1rem;
+    padding: 0.5rem 1rem 0.5rem 2rem;
+    border-radius: 3rem;
+    border: none;
+    font-family: monospace;
+    align-items: center;
+    cursor: pointer;
+    display: flex;
+}
+
+.topBtn .btn{
+    margin-left: 2rem;
+    width: 3rem;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    background: var(--sharp-color);
+    justify-content: center;
+    color: var(--white);
+    border-radius: 3rem;
+}
+
+#contactForm .content {
+    padding-left: var(--content-padding);
+    padding-right: var(--content-padding);
+}
+
+legend {
+    margin-bottom: var(--normal-spacing);
+    padding-inline: 0%;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="email"],
+textarea {
+    padding: 0.5rem;
+    border: 1px solid var(--dark);
+    border-radius: 0.5rem;
+}
+
+.section-title {
+    margin-bottom: 0.5rem;
+}
+
+a {
+    text-decoration: none;
+}
+
+.weather {
+    align-self: center;
+    font-size: 1rem !important;
+}
+
+.info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.rain {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.content > p {
+    width: 50%;
+}
+
+.separator {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    width: 100%; /* Full width */
+    margin: 1rem 0; /* Add vertical spacing */
+}
+
+.separator::before,
+.separator::after {
+    content: '';
+    flex: 1; /* Take up remaining space */
+    border-bottom: 1px solid #ccc; /* Horizontal line */
+    margin: 0 1rem; /* Space around the text */
+}
+
+.separator span {
+    font-size: 1rem; /* Adjust text size */
+    color: #444; /* Text color */
+    white-space: nowrap; /* Prevent text wrapping */
+}
+
+.closeModal{
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+@media only screen and (max-width: 600px) {
+    html {
+        font-size: 14px;
+    }
+
+    h1 {
+        font-size: 3rem;
+    }
+
+    .galleryImg {
+        max-width: calc(100vw - 3rem);
+    }
+
+    .text-content {
+        max-width: none;
+    }
+    .btnGrp{
+        flex-direction: column;
+    }
+    .content > p {
+        width: 80%;
+    }
+
+    .destinationGallery {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+}

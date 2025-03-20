@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+    <head lang="en_gb">
+        <title>🌿 Weekend Escapism</title>
+        <meta charset="UTF-8">
+        <meta name="description" content="Weekend Escapism - Take a break from the hustle and bustle of everyday life and enjoy a weekend of pure relaxation and fun!">
+        <meta name="keywords" content="Hiking, Arcade, Weekend, Manchester, Great Orme, Llandudno, Wales">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="css/index.css">
+        <link rel="icon" type="image/png" href="img/IMG_9123.jpeg">
+        <!-- font -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Notable&family=Orbitron:wght@400..900&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+        <!-- icon -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20,400,0,0" />
+    </head>
+    <body>
+        <main class="container">
+            <div class="modal">
+                <div class="modal-quiz">
+                    <button class="closeModal" id="closeModal">X</button>
+                    <p>Starting From</p>
+                    <div class="choices">
+                        <div class="btnGrp">
+                            <button class="choice" id="Manchester">Manchester</button>
+                            <button class="choice" id="Liverpool">Liverpool</button>
+                            <button class="choice" id="Chester">Chester</button>
+                        </div>
+                        <!-- <div class="separator">
+                            <span>or</span>
+                        </div>
+                        <label for="postcode">Post Code</label>
+                        <input type="text" id="postcode" name="postcode"> -->
+                        <div class="destinationGallery"></div>
+                    </div>
+                </div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#topSection"><img src="img/vertical_align_top_icon.svg" alt="Top Section">Top</a></li>
+                </ul>
+            </nav>
+            <section id="topSection">
+                <div class="content">
+                    <h2>Relax / Unwind</h2>
+                    <h1>Weekend Escapism</h1>
+                    <p>Take a break from the hustle and bustle of everyday life and enjoy a weekend of pure relaxation and fun! </p>
+                    <a href="#gallery-container"><button class="topBtn">Find My Destination <div class="btn">>></div></button></a>
+                </div>
+            </section>
+            <section id="contentSection">
+                <div class="content">
+                    <div class="text-content">
+                        <p>
+                            Taking a weekend trip can significantly boost mental health by providing a much-needed break from daily stress. Escaping to nature, even for a short time, helps reduce anxiety, improve mood, and restore focus. The change of scenery, fresh air, and physical activity promote relaxation and mental clarity, making it easier to return to everyday life feeling refreshed and re-energized. Whether it’s a peaceful walk in the countryside or exploring a scenic destination, weekend travel offers a simple yet effective way to reset the mind and enhance overall well-being.
+                        </p>
+                    </div>
+                    <div id="gallery-container" class="gallery-container">
+                        <h2 class="section-title">Natural Destination</h2>
+                        <p>
+                            Escape the city stress with an eco-friendly and wallet-friendly weekend getaway! Explore scenic trails, unwind in nature, and recharge—all while keeping it sustainable and affordable. 
+                        </p>
+                        <div class="gallery" id="destinationGallery">
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <footer>© Copyright Information</footer>
+        <script src="js/index.js"></script>
+    </body>
+</html>
