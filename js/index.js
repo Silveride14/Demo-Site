@@ -1,18 +1,18 @@
 const nature = [
-    {name: `Peak District`, src: `img/img - 1.jpeg`, lat: 53.3430, lon: -1.7722},
-    {name: `Lake District`, src: `img/img - 2.jpeg`, lat: 54.4609, lon: -3.0886},
-    {name: `Kinder Scout`, src: `img/img - 3.jpeg`, lat: 53.3848, lon: -1.8704},
-    {name: `Mam Tor`, src: `img/img - 4.jpeg`, lat: 53.3498, lon: -1.7745},
-    {name: `Formby Beach`, src: `img/img - 9.jpeg`, lat: 53.5534, lon: -3.0686},
-    {name: `Alderley Edge`, src: `img/img - 10.jpeg`, lat: 53.3030, lon: -2.2360},
+    {name: `Peak District`, src: `img/img-1.jpeg`, lat: 53.3430, lon: -1.7722},
+    {name: `Lake District`, src: `img/img-2.jpeg`, lat: 54.4609, lon: -3.0886},
+    {name: `Kinder Scout`, src: `img/img-3.jpeg`, lat: 53.3848, lon: -1.8704},
+    {name: `Mam Tor`, src: `img/img-4.jpeg`, lat: 53.3498, lon: -1.7745},
+    {name: `Formby Beach`, src: `img/img-9.jpeg`, lat: 53.5534, lon: -3.0686},
+    {name: `Alderley Edge`, src: `img/img-10.jpeg`, lat: 53.3030, lon: -2.2360},
     {name: `Llandudno`, src: `img/IMG_9154.jpeg`, lat: 53.324238, lon: -3.827588},
     {name: `Great Orme`, src: `img/IMG_9132.jpeg`, lat: 53.3286, lon: -3.8536},
     {name: `St Tudno's Church`, src: `img/IMG_9149.jpeg`, lat: 53.3286, lon: -3.8536},
     {name: `North Wales`, src: `img/IMG_9123.jpeg`, lat: 53.324238, lon: -3.827588},
-    {name: `Dovestone Reservoir`, src: `img/img - 5.jpeg`, lat: 53.5333, lon: -1.9833},
-    {name: `Rivington Pike`, src: `img/img - 6.jpeg`, lat: 53.6214, lon: -2.5706},
-    {name: `Tatton Park`, src: `img/img - 7.jpeg`, lat: 53.3308, lon: -2.3876},
-    {name: `Delamere Forest`, src: `img/img - 8.jpeg`, lat: 53.2280, lon: -2.6930},
+    {name: `Dovestone Reservoir`, src: `img/img-5.jpeg`, lat: 53.5333, lon: -1.9833},
+    {name: `Rivington Pike`, src: `img/img-6.jpeg`, lat: 53.6214, lon: -2.5706},
+    {name: `Tatton Park`, src: `img/img-7.jpeg`, lat: 53.3308, lon: -2.3876},
+    {name: `Delamere Forest`, src: `img/img-8.jpeg`, lat: 53.2280, lon: -2.6930},
 ];
 
 let postcode = {
