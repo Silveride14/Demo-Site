@@ -235,7 +235,7 @@ a {
     z-index: 10; /* Ensure it stays above other content */
     font-size: 5rem;
     margin: 0;
-    font-family: "Bonheur Royale", cursive;
+    font-family: "Lobster", sans-serif;
     color: var(--sharp-color);
     line-height: 5.5rem;
     transition: position 0.3s ease-in-out; /* Smooth transition for position change */
