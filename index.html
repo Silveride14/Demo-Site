@@ -63,6 +63,31 @@
                         <p>
                             Escape the city stress with an eco-friendly and wallet-friendly weekend getaway! Explore scenic trails, unwind in nature, and recharge—all while keeping it sustainable and affordable. 
                         </p>
+                        <div class="filter">
+                            <div class="selectGroup">
+                                <label for="from">Starting From</label>
+                                <select id="from">
+                                    <option value="Manchester" selected="selected">Manchester</option>
+                                    <option value="Liverpool">Liverpool</option>
+                                    <option value="Chester">Chester</option>
+                                </select>
+                            </div>
+                            <div class="distanceGroup">
+                                <label for="distance">Distance (Miles)</label>
+                                <div class="rangeInput">
+                                    <div class="min">0</div>
+                                    <input type="range" id="distance" name="distance" min="0" max="100" value="0">
+                                    <div class="max">100</div>
+                                </div>
+                            </div>
+                            <div class="activityGroup">
+                                <label for="activity">Activity</label>
+                                <div class="pills">
+                                    <button class="pill" id="hiking">Hiking</button>
+                                    <button class="pill" id="arcade">Arcade</button>
+                                </div>
+                            </div>
+                        </div>
                         <div class="gallery" id="destinationGallery">
                         </div>
                     </div>

@@ -41,6 +41,8 @@ nature.forEach((des) => {
             return;
         }
         response.json().then((result) => {
+            //get distance selected destination
+            des.distance = haversineDistance(postcode.Manchester.lat, postcode.Manchester.lon, des.lat, des.lon);
             let googleMap = `https://www.google.com/maps/search/?api=1&query=${des.name}`
             let galleryCard =   `<div class="galleryImg">
                                     <img src="${des.src}" alt="${des.name}">
@@ -53,6 +55,7 @@ nature.forEach((des) => {
                                             <span class="material-symbols-outlined weather">rainy</span>
                                             <span>${result.current.rain}mm</span>
                                         </span>
+                                        <span>${des.distance} miles</span>
                                         <span class="temp">${result.current.temperature_2m}°C</span>
                                     </div>
                                 </div>`;
@@ -87,52 +90,14 @@ function haversineDistance(lat1, lon1, lat2, lon2) {
 
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 
-    return R * c; // Distance in miles
+    return Math.round(R * c); // Distance in miles
 }
-
-$(`.choice`).on(`click`, (element) => {
-    $('.destinationGallery').html('');
-    let closestNature = nature.map((des) => {
-        let distance = haversineDistance(
-            postcode[element.target.id].lat,
-            postcode[element.target.id].lon,
-            des.lat,
-            des.lon
-        );
-        return { name: des.name, distance: distance };
-    }).sort((a, b) => a.distance - b.distance);
-    let closestNatureCards = closestNature.map((des) => {
-        let googleMap = `https://www.google.com/maps/dir/${postcode[element.target.id].name}/${des.name}`
-        return `<div class="galleryImg">
-                    <img src="${nature.find((spot) => spot.name === des.name).src}" alt="${des.name}">
-                    <div class="info">
-                        <a href="${googleMap}" target="_blank">
-                            <h4>${des.name}</h4>
-                            <span class="material-symbols-outlined weather">near_me</span>
-                        </a>
-                        <span>${des.distance.toFixed(2)} miles</span>
-                    </div>
-                </div>`;
-    }
-    ).join('');
-    $('.destinationGallery').html(closestNatureCards);
-    $(`.choice`).removeClass('active');
-    element.target.classList.add('active');
-});
-
-// $(`.topBtn`).on(`click`, () => {
-//     $(`.modal`).show();
-// });
-
-// $(`.closeModal`).on(`click`, () => {
-//     $(`.modal`).hide();
-// });
 
 const $h1 = $('#topSection h1'); // Select the <h1> in the #topSection
 const $topSection = $('#topSection'); // Select the #topSection
 $(window).on('scroll', function () {
     const topSectionBottom = $topSection.offset().top + $topSection.outerHeight(); // Bottom of #topSection
-    const scrollTop = $(window).scrollTop()-100; // Current scroll position
+    const scrollTop = $(window).scrollTop()+500; // Current scroll position
 
     if (scrollTop >= topSectionBottom) {
         // If the scroll position is past the bottom of #topSection
