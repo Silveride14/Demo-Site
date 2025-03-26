@@ -15,67 +15,125 @@ const nature = [
     {name: `Delamere Forest`, src: `img/Img-8.jpeg`, lat: 53.2280, lon: -2.6930},
 ];
 
-let postcode = {
-    Manchester : {
+const postcode = [
+    {
         name: `Manchester`,
         lat: 53.483959,
         lon: -2.244644
     }, 
-    Liverpool : {
+    {
         name: `Liverpool`,
         lat: 53.408371,
         lon: -2.991573
     },
-    Chester : {
+    {
         name: `Chester`,
         lat: 53.190887,
         lon: -2.891305
     },
+]
+
+let galleryCollection = [];
+
+postcode.forEach((location) => {
+    //if it is the first location, set it as the default location
+    let option = `<option value="${location.name}" ${location.name === `Manchester`? `selected=""`: ``}">${location.name}</option>`;
+    $(`#from`).append(option);
+});
+
+createGalleryCard();
+// create gallery card for each destination
+function createGalleryCard(){
+    nature.forEach((des) => {
+        fetch(`https://api.open-meteo.com/v1/forecast?latitude=${des.lat}&longitude=${des.lon}&current=temperature_2m,rain&forecast_days=1`)
+        .then((response) =>{
+            if (response.status !== 200) {
+                console.log(`Looks like there was a problem fetching feeds. Status Code: ${response.status}`);
+                return;
+            }
+            response.json().then((result) => {
+                //find manchester in postcode array
+                let loc = postcode.find((loc) => loc.name === `Manchester`);
+                //get distance selected destination
+                des.distance = haversineDistance(loc.lat, loc.lon, des.lat, des.lon);
+                let googleMap = `https://www.google.com/maps/search/?api=1&query=${des.name}`
+                let galleryCard = $('<div>', {
+                    class: 'galleryImg',
+                    'data-name': des.name,
+                    'data-distance': des.distance,
+                    'data-temp': result.current.temperature_2m,
+                    'data-rain': result.current.rain,
+                    'data-lat': des.lat,
+                    'data-lon': des.lon
+                }).append(
+                    $('<img>', {
+                        src: des.src,
+                        alt: des.name
+                    }),
+                    $('<div>', { class: 'info' }).append(
+                        $('<a>', {
+                            href: googleMap,
+                            target: '_blank'
+                        }).append(
+                            $('<h4>').text(des.name),
+                            $('<span>', { class: 'material-symbols-outlined weather' }).text('near_me')
+                        ),
+                        $('<span>', { class: 'rain' }).append(
+                            $('<span>', { class: 'material-symbols-outlined weather' }).text('rainy'),
+                            $('<span>').text(`${result.current.rain}mm`)
+                        ),
+                        $('<span>').text(`${des.distance} miles`),
+                        $('<span>', { class: 'temp' }).text(`${result.current.temperature_2m}°C`)
+                    )
+                );
+                galleryCollection.push(galleryCard);
+                //initalise the gallery
+                sortGalleryByDistance();
+            })
+        })
+        .catch((err) => {
+            let loc = postcode.find((loc) => loc.name === `Manchester`);
+            des.distance = haversineDistance(loc.lat, loc.lon, des.lat, des.lon);
+            let googleMap = `https://www.google.com/maps/search/?api=1&query=${des.name}`
+            let galleryCard = $('<div>', {
+                class: 'galleryImg',
+                'data-name': des.name,
+                'data-distance': des.distance,
+                'data-lat': des.lat,
+                'data-lon': des.lon
+            }).append(
+                $('<img>', {
+                    src: des.src,
+                    alt: des.name
+                }),
+                $('<div>', { class: 'info' }).append(
+                    $('<a>', {
+                        href: googleMap,
+                        target: '_blank'
+                    }).append(
+                        $('<h4>').text(des.name),
+                        $('<span>', { class: 'material-symbols-outlined weather' }).text('near_me')
+                    ),
+                    $('<span>').text(`${des.distance} miles`)
+                )
+            );
+            galleryCollection.push(galleryCard);
+            //initalise the gallery
+            sortGalleryByDistance();
+            console.log(`Fetch Error fetching feeds. :-S`, err);
+        });
+    });
 }
 
-nature.forEach((des) => {
-    fetch(`https://api.open-meteo.com/v1/forecast?latitude=${des.lat}&longitude=${des.lon}&current=temperature_2m,rain&forecast_days=1`)
-    .then((response) =>{
-        if (response.status !== 200) {
-            console.log(`Looks like there was a problem fetching feeds. Status Code: ${response.status}`);
-            return;
-        }
-        response.json().then((result) => {
-            //get distance selected destination
-            des.distance = haversineDistance(postcode.Manchester.lat, postcode.Manchester.lon, des.lat, des.lon);
-            let googleMap = `https://www.google.com/maps/search/?api=1&query=${des.name}`
-            let galleryCard =   `<div class="galleryImg">
-                                    <img src="${des.src}" alt="${des.name}">
-                                    <div class="info">
-                                        <a href="${googleMap}" target="_blank">
-                                            <h4>${des.name}</h4>
-                                            <span class="material-symbols-outlined weather">near_me</span>
-                                        </a>
-                                        <span class="rain">
-                                            <span class="material-symbols-outlined weather">rainy</span>
-                                            <span>${result.current.rain}mm</span>
-                                        </span>
-                                        <span>${des.distance} miles</span>
-                                        <span class="temp">${result.current.temperature_2m}°C</span>
-                                    </div>
-                                </div>`;
-            $('#destinationGallery').append(galleryCard);
-        })
-    })
-    .catch((err) => {
-        let galleryCard =   `<div class="galleryImg">
-                                <img src="${des.src}" alt="${des.name}">
-                                <div class="info">
-                                    <a href="${googleMap}" target="_blank">
-                                        <h4>${des.name}</h4>
-                                        <span class="material-symbols-outlined weather">near_me</span>
-                                    </a>
-                                </div>
-                            </div>`;
-        $('#destinationGallery').append(galleryCard);
-        console.log(`Fetch Error fetching feeds. :-S`, err);
+//initialise the gallery
+function initialiseGallery(){
+    //empty the gallery
+    $(`#destinationGallery`).html(``);
+    //append the galleryCollection to the gallery
+    galleryCollection.forEach((card) => {
+        $(`#destinationGallery`).append(card);
     });
-});
+}
 
 function haversineDistance(lat1, lon1, lat2, lon2) {
     const R = 3958.8; // Radius of the Earth in miles (use 6371 for kilometers)
@@ -95,7 +153,7 @@ function haversineDistance(lat1, lon1, lat2, lon2) {
 
 const $h1 = $('#topSection h1'); // Select the <h1> in the #topSection
 const $topSection = $('#topSection'); // Select the #topSection
-$(window).on('scroll', function () {
+$(window).on('scroll', ()=>{
     const topSectionBottom = $topSection.offset().top + $topSection.outerHeight(); // Bottom of #topSection
     const scrollTop = $(window).scrollTop()+500; // Current scroll position
 
@@ -107,3 +165,21 @@ $(window).on('scroll', function () {
         $h1.removeClass('fixed-h1'); // Remove the fixed class
     }
 });
+
+$(`#from`).on(`change`, ()=>{
+    sortGalleryByDistance();
+})
+
+function sortGalleryByDistance(){
+    let selectedLocation = $(`#from option:selected`).val();
+    let loc = postcode.find((loc) => loc.name === selectedLocation);
+    //change the data-distance for each galleryCollection
+    galleryCollection.forEach((card) => {
+        card[0].setAttribute(`data-distance`, haversineDistance(loc.lat, loc.lon, card[0].getAttribute('data-lat'), card[0].getAttribute('data-lon')));
+    });
+    //sort the galleryCollection by distance
+    galleryCollection.sort((a, b) => a[0].getAttribute(`data-distance`) - b[0].getAttribute(`data-distance`));
+    
+    //reinitialise the gallery
+    initialiseGallery();
+}
