@@ -197,7 +197,7 @@ a {
 
 #topSection {
     position: relative;
-    background-image: url('../img/IMG_9123.jpeg'); /* Adjust the path if necessary */
+    background-image: url('../img/tatton-park.jpeg'); /* Adjust the path if necessary */
     width: 100%;
     height: 100vh; /* Full viewport height */
     display: flex;
@@ -243,6 +243,7 @@ a {
 }
 
 .gallery-container {
+    scroll-padding-top: 5rem;
     max-width: 100vw;
     margin-top: var(--content-padding);
     padding-left: var(--content-padding);

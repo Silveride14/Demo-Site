@@ -1,18 +1,18 @@
 const nature = [
-    {name: `Peak District`, src: `img/Img-1.jpeg`, lat: 53.3430, lon: -1.7722, tags: [`hiking`, `nature`, `mountains`, `scenic`]},
-    {name: `Lake District`, src: `img/Img-2.jpeg`, lat: 54.4609, lon: -3.0886, tags: [`lakes`, `nature`, `scenic`, `adventure`]},
-    {name: `Kinder Scout`, src: `img/Img-3.jpeg`, lat: 53.3848, lon: -1.8704, tags: [`hiking`, `adventure`, `nature`, `mountains`]},
-    {name: `Mam Tor`, src: `img/Img-4.jpeg`, lat: 53.3498, lon: -1.7745, tags: [`mountains`, `hiking`, `scenic`, `nature`]},
-    {name: `Formby Beach`, src: `img/Img-9.jpeg`, lat: 53.5534, lon: -3.0686, tags: [`beach`, `coastal`, `nature`, `family`]},
-    {name: `Alderley Edge`, src: `img/Img-10.jpeg`, lat: 53.3030, lon: -2.2360, tags: [`forest`, `hiking`, `scenic`, `nature`]},
-    {name: `Llandudno`, src: `img/IMG_9154.jpeg`, lat: 53.324238, lon: -3.827588, tags: [`coastal`, `scenic`, `nature`, `family`]},
-    {name: `Great Orme`, src: `img/IMG_9132.jpeg`, lat: 53.3286, lon: -3.8536, tags: [`hiking`, `nature`, `scenic`, `adventure`]},
-    {name: `St Tudno's Church`, src: `img/IMG_9149.jpeg`, lat: 53.3286, lon: -3.8536, tags: [`historic`, `architecture`, `scenic`, `culture`]},
-    {name: `North Wales`, src: `img/IMG_9123.jpeg`, lat: 53.324238, lon: -3.827588, tags: [`nature`, `scenic`, `adventure`, `family`]},
-    {name: `Dovestone Reservoir`, src: `img/Img-5.jpeg`, lat: 53.5333, lon: -1.9833, tags: [`lakes`, `hiking`, `nature`, `scenic`]},
-    {name: `Rivington Pike`, src: `img/Img-6.jpeg`, lat: 53.6214, lon: -2.5706, tags: [`hiking`, `scenic`, `adventure`, `nature`]},
-    {name: `Tatton Park`, src: `img/Img-7.jpeg`, lat: 53.3308, lon: -2.3876, tags: [`park`, `nature`, `family`, `historic`]},
-    {name: `Delamere Forest`, src: `img/Img-8.jpeg`, lat: 53.2280, lon: -2.6930, tags: [`forest`, `hiking`, `nature`, `adventure`]},
+    {name: `Peak District`, src: `img/peak-district.jpeg`, lat: 53.3430, lon: -1.7722, tags: [`hiking`, `nature`, `mountains`, `scenic`]},
+    {name: `Lake District`, src: `img/lake-district.jpeg`, lat: 54.4609, lon: -3.0886, tags: [`lakes`, `nature`, `scenic`, `adventure`]},
+    {name: `Kinder Scout`, src: `img/kinder-scout.jpeg`, lat: 53.3848, lon: -1.8704, tags: [`hiking`, `adventure`, `nature`, `mountains`]},
+    {name: `Mam Tor`, src: `img/mam-tor.jpeg`, lat: 53.3498, lon: -1.7745, tags: [`mountains`, `hiking`, `scenic`, `nature`]},
+    {name: `Formby Beach`, src: `img/formby-beach.jpeg`, lat: 53.5534, lon: -3.0686, tags: [`beach`, `coastal`, `nature`, `family`]},
+    {name: `Alderley Edge`, src: `img/alderley-edge.jpeg`, lat: 53.3030, lon: -2.2360, tags: [`forest`, `hiking`, `scenic`, `nature`]},
+    {name: `Llandudno`, src: `img/llandudno.jpeg`, lat: 53.324238, lon: -3.827588, tags: [`coastal`, `scenic`, `nature`, `family`]},
+    {name: `Great Orme`, src: `img/great-orme.jpeg`, lat: 53.3286, lon: -3.8536, tags: [`hiking`, `nature`, `scenic`, `adventure`]},
+    {name: `St Tudno's Church`, src: `img/st-tudnos-church.jpeg`, lat: 53.3286, lon: -3.8536, tags: [`historic`, `architecture`, `scenic`, `culture`]},
+    {name: `North Wales`, src: `img/north-wales.jpeg`, lat: 53.324238, lon: -3.827588, tags: [`nature`, `scenic`, `adventure`, `family`]},
+    {name: `Dovestone Reservoir`, src: `img/dovestone-reservoir.jpeg`, lat: 53.5333, lon: -1.9833, tags: [`lakes`, `hiking`, `nature`, `scenic`]},
+    {name: `Rivington Pike`, src: `img/rivington-pike.jpeg`, lat: 53.6214, lon: -2.5706, tags: [`hiking`, `scenic`, `adventure`, `nature`]},
+    {name: `Tatton Park`, src: `img/tatton-park.jpeg`, lat: 53.3308, lon: -2.3876, tags: [`park`, `nature`, `family`, `historic`]},
+    {name: `Delamere Forest`, src: `img/delamere-forest.jpeg`, lat: 53.2280, lon: -2.6930, tags: [`forest`, `hiking`, `nature`, `adventure`]},
 ];
 
 const postcode = [
@@ -230,6 +230,8 @@ function filterByTag(e){
         tagsFilter.forEach((tag) => {
             if(!tags.includes(tag)){
                 show = false;
+            } else {
+                show = true;
             }
         });
         if(show){
