@@ -69,19 +69,15 @@
                                 <select id="from"></select>
                             </div>
                             <div class="distanceGroup">
-                                <label for="distance">Distance (Miles)</label>
+                                <label for="distanceRange">Distance (Miles)</label>
                                 <div class="rangeInput">
-                                    <div class="min">0</div>
-                                    <input type="range" id="distance" name="distance" min="0" max="100" value="0">
-                                    <div class="max">100</div>
+                                    <input type="range" id="distanceRange" name="distanceRange" max="100" value="100" step="10">
+                                    <div id="maxDistance">100</div>
                                 </div>
                             </div>
                             <div class="activityGroup">
                                 <label for="activity">Activity</label>
-                                <div class="pills">
-                                    <button class="pill" id="hiking">Hiking</button>
-                                    <button class="pill" id="arcade">Arcade</button>
-                                </div>
+                                <div class="pills"></div>
                             </div>
                         </div>
                         <div class="gallery" id="destinationGallery">

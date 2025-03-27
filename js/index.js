@@ -1,39 +1,28 @@
 const nature = [
-    {name: `Peak District`, src: `img/Img-1.jpeg`, lat: 53.3430, lon: -1.7722},
-    {name: `Lake District`, src: `img/Img-2.jpeg`, lat: 54.4609, lon: -3.0886},
-    {name: `Kinder Scout`, src: `img/Img-3.jpeg`, lat: 53.3848, lon: -1.8704},
-    {name: `Mam Tor`, src: `img/Img-4.jpeg`, lat: 53.3498, lon: -1.7745},
-    {name: `Formby Beach`, src: `img/Img-9.jpeg`, lat: 53.5534, lon: -3.0686},
-    {name: `Alderley Edge`, src: `img/Img-10.jpeg`, lat: 53.3030, lon: -2.2360},
-    {name: `Llandudno`, src: `img/IMG_9154.jpeg`, lat: 53.324238, lon: -3.827588},
-    {name: `Great Orme`, src: `img/IMG_9132.jpeg`, lat: 53.3286, lon: -3.8536},
-    {name: `St Tudno's Church`, src: `img/IMG_9149.jpeg`, lat: 53.3286, lon: -3.8536},
-    {name: `North Wales`, src: `img/IMG_9123.jpeg`, lat: 53.324238, lon: -3.827588},
-    {name: `Dovestone Reservoir`, src: `img/Img-5.jpeg`, lat: 53.5333, lon: -1.9833},
-    {name: `Rivington Pike`, src: `img/Img-6.jpeg`, lat: 53.6214, lon: -2.5706},
-    {name: `Tatton Park`, src: `img/Img-7.jpeg`, lat: 53.3308, lon: -2.3876},
-    {name: `Delamere Forest`, src: `img/Img-8.jpeg`, lat: 53.2280, lon: -2.6930},
+    {name: `Peak District`, src: `img/Img-1.jpeg`, lat: 53.3430, lon: -1.7722, tags: [`hiking`, `nature`, `mountains`, `scenic`]},
+    {name: `Lake District`, src: `img/Img-2.jpeg`, lat: 54.4609, lon: -3.0886, tags: [`lakes`, `nature`, `scenic`, `adventure`]},
+    {name: `Kinder Scout`, src: `img/Img-3.jpeg`, lat: 53.3848, lon: -1.8704, tags: [`hiking`, `adventure`, `nature`, `mountains`]},
+    {name: `Mam Tor`, src: `img/Img-4.jpeg`, lat: 53.3498, lon: -1.7745, tags: [`mountains`, `hiking`, `scenic`, `nature`]},
+    {name: `Formby Beach`, src: `img/Img-9.jpeg`, lat: 53.5534, lon: -3.0686, tags: [`beach`, `coastal`, `nature`, `family`]},
+    {name: `Alderley Edge`, src: `img/Img-10.jpeg`, lat: 53.3030, lon: -2.2360, tags: [`forest`, `hiking`, `scenic`, `nature`]},
+    {name: `Llandudno`, src: `img/IMG_9154.jpeg`, lat: 53.324238, lon: -3.827588, tags: [`coastal`, `scenic`, `nature`, `family`]},
+    {name: `Great Orme`, src: `img/IMG_9132.jpeg`, lat: 53.3286, lon: -3.8536, tags: [`hiking`, `nature`, `scenic`, `adventure`]},
+    {name: `St Tudno's Church`, src: `img/IMG_9149.jpeg`, lat: 53.3286, lon: -3.8536, tags: [`historic`, `architecture`, `scenic`, `culture`]},
+    {name: `North Wales`, src: `img/IMG_9123.jpeg`, lat: 53.324238, lon: -3.827588, tags: [`nature`, `scenic`, `adventure`, `family`]},
+    {name: `Dovestone Reservoir`, src: `img/Img-5.jpeg`, lat: 53.5333, lon: -1.9833, tags: [`lakes`, `hiking`, `nature`, `scenic`]},
+    {name: `Rivington Pike`, src: `img/Img-6.jpeg`, lat: 53.6214, lon: -2.5706, tags: [`hiking`, `scenic`, `adventure`, `nature`]},
+    {name: `Tatton Park`, src: `img/Img-7.jpeg`, lat: 53.3308, lon: -2.3876, tags: [`park`, `nature`, `family`, `historic`]},
+    {name: `Delamere Forest`, src: `img/Img-8.jpeg`, lat: 53.2280, lon: -2.6930, tags: [`forest`, `hiking`, `nature`, `adventure`]},
 ];
 
 const postcode = [
-    {
-        name: `Manchester`,
-        lat: 53.483959,
-        lon: -2.244644
-    }, 
-    {
-        name: `Liverpool`,
-        lat: 53.408371,
-        lon: -2.991573
-    },
-    {
-        name: `Chester`,
-        lat: 53.190887,
-        lon: -2.891305
-    },
+    {name: `Manchester`, lat: 53.483959, lon: -2.244644}, 
+    {name: `Liverpool`, lat: 53.408371, lon: -2.991573},
+    {name: `Chester`, lat: 53.190887, lon: -2.891305},
 ]
 
 let galleryCollection = [];
+let tagsFilter = [];
 
 postcode.forEach((location) => {
     //if it is the first location, set it as the default location
@@ -70,25 +59,28 @@ function createGalleryCard(){
                         src: des.src,
                         alt: des.name
                     }),
+                    $('<a>', {
+                        class: 'info',
+                        href: googleMap,
+                        target: '_blank'
+                    }).append(
+                        $('<h4>').text(des.name),
+                        $('<span>', { class: 'material-symbols-outlined weather' }).text('near_me')
+                    ),
                     $('<div>', { class: 'info' }).append(
-                        $('<a>', {
-                            href: googleMap,
-                            target: '_blank'
-                        }).append(
-                            $('<h4>').text(des.name),
-                            $('<span>', { class: 'material-symbols-outlined weather' }).text('near_me')
-                        ),
                         $('<span>', { class: 'rain' }).append(
                             $('<span>', { class: 'material-symbols-outlined weather' }).text('rainy'),
                             $('<span>').text(`${result.current.rain}mm`)
                         ),
-                        $('<span>').text(`${des.distance} miles`),
+                        $('<span>', { class: 'distance'}).text(`${des.distance} miles`),
                         $('<span>', { class: 'temp' }).text(`${result.current.temperature_2m}°C`)
                     )
                 );
                 galleryCollection.push(galleryCard);
-                //initalise the gallery
+                //initialise the gallery
                 sortGalleryByDistance();
+                initialiseRangeInput();
+                initialiseTags();
             })
         })
         .catch((err) => {
@@ -118,8 +110,10 @@ function createGalleryCard(){
                 )
             );
             galleryCollection.push(galleryCard);
-            //initalise the gallery
+            //initialise the gallery
             sortGalleryByDistance();
+            initialiseRangeInput();
+            initialiseTags();
             console.log(`Fetch Error fetching feeds. :-S`, err);
         });
     });
@@ -168,18 +162,80 @@ $(window).on('scroll', ()=>{
 
 $(`#from`).on(`change`, ()=>{
     sortGalleryByDistance();
+    initialiseRangeInput();
 })
+
+$(`#distanceRange`).on(`change`, ()=>{
+    let maxDistance = $(`#distanceRange`).val();
+    $(`#maxDistance`).text(maxDistance);
+    galleryCollection.forEach((card) => {
+        if(card[0].getAttribute(`data-distance`) > maxDistance){
+            card[0].style.display = `none`;
+        }else{
+            card[0].style.display = `block`;
+        }
+    });
+});
 
 function sortGalleryByDistance(){
     let selectedLocation = $(`#from option:selected`).val();
     let loc = postcode.find((loc) => loc.name === selectedLocation);
     //change the data-distance for each galleryCollection
     galleryCollection.forEach((card) => {
-        card[0].setAttribute(`data-distance`, haversineDistance(loc.lat, loc.lon, card[0].getAttribute('data-lat'), card[0].getAttribute('data-lon')));
+        let distance = haversineDistance(loc.lat, loc.lon, card[0].getAttribute('data-lat'), card[0].getAttribute('data-lon'));
+        card[0].setAttribute(`data-distance`, distance);
+        card[0].children[2].children[1].textContent = `${distance} miles`;
     });
+    //change the distance text
     //sort the galleryCollection by distance
     galleryCollection.sort((a, b) => a[0].getAttribute(`data-distance`) - b[0].getAttribute(`data-distance`));
     
     //reinitialise the gallery
     initialiseGallery();
+}
+
+function initialiseRangeInput(){
+    let longestDistance = Math.max(...galleryCollection.map((card) => card[0].getAttribute(`data-distance`)));
+    let maxDistance = Math.ceil(longestDistance/10)*10;
+    $(`#maxDistance`).text(maxDistance);
+    $(`#distanceRange`).attr(`max`, maxDistance);
+    $(`#distanceRange`).val(maxDistance);
+}
+
+function initialiseTags(){
+    let tags = [];
+    $(`.pills`).html(``);
+    nature.forEach((des) => {
+        des.tags.forEach((tag) => {
+            if(!tags.includes(tag)){
+                tags.push(tag);
+                $(`.pills`).append(`<button class="pill" id="${tag}" onclick="filterByTag(event)">${tag}</button>`);
+            }
+        });
+    });
+}
+
+function filterByTag(e){
+    e.target.classList.toggle(`active`);
+    let tag = e.target.id;
+    let show = true;
+    if(!tagsFilter.includes(tag)){
+        tagsFilter.push(tag);
+    } else {
+        tagsFilter = tagsFilter.filter((t) => t !== tag);
+    }
+    galleryCollection.forEach((card) => {
+        let tags = nature.find((des) => des.name === card[0].getAttribute(`data-name`)).tags;
+        //if tags in the card includes any tags selected, show the card
+        tagsFilter.forEach((tag) => {
+            if(!tags.includes(tag)){
+                show = false;
+            }
+        });
+        if(show){
+            card[0].style.display = `block`;
+        } else {
+            card[0].style.display = `none`;
+        }
+    });
 }
