@@ -189,7 +189,7 @@ function initialiseTags(){
         des.tags.forEach((tag) => {
             if(!tags.includes(tag)){
                 tags.push(tag);
-                $(`.pills`).append(`<button class="pill" id="${tag}" onclick="filterByTag(event)">${tag}</button>`);
+                $(`.pills`).append(`<button class="pill" id="${tag}">${tag}</button>`);
             }
         });
     });
@@ -221,6 +221,10 @@ function filterByTag(e){
         }
     });
 }
+
+$('.pills').on('click', '.pill', function (e) {
+    filterByTag(e);
+});
 
 // Attach a single event listener to the parent container
 $('#destinationGallery').on('click', '.galleryImg', function (e) {
