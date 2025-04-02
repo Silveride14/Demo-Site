@@ -553,6 +553,7 @@ label{
     background: none;
     text-transform: capitalize; 
     width: fit-content;
+    font-size: 0.8rem;
 }
 
 .locationHref{
@@ -566,6 +567,7 @@ label{
 
 #desSection > .content > .weather-info{
     margin-bottom: 1rem;
+    margin-top: 1rem;
     font-size: 1.5rem;
 }
 #desSection > .content > .weather-info >.material-symbols-outlined{
