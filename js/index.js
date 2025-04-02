@@ -262,3 +262,25 @@ function showDestination(e) {
         scrollTop: $('#desSection').offset().top
     }, 0);
 }
+
+// Initialize the map and set its view to a specific location and zoom level
+const map = L.map('map').setView([53.483959, -2.244644], 10); // Example: Manchester coordinates
+
+// Add OpenStreetMap tiles
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map);
+
+// Add a marker to the map
+const marker = L.marker([53.483959, -2.244644]).addTo(map);
+marker.bindPopup('<b>Manchester</b><br>Starting Point').openPopup();
+
+// Loop through all destinations in the nature array and add markers to the map
+nature.forEach((des) => {
+    const marker = L.marker([des.lat, des.lon]).addTo(map);
+    marker.bindPopup(`
+        <b>${des.name}</b><br>
+        ${des.location}<br>
+        <a href="https://www.google.com/maps/search/?api=1&query=${des.name}" target="_blank">View on Google Maps</a>
+    `);
+});

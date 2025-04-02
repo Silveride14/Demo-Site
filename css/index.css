@@ -524,6 +524,15 @@ em {
     color: var(--green);
 }
 
+#map {
+    height: 500px; /* Set the height of the map */
+    width: 100%; /* Full width */
+}
+
+#mapSection{
+    padding: 0 var(--content-padding);
+}
+
 @media only screen and (max-width: 600px) {
     html {
         font-size: 14px;
