@@ -2,6 +2,8 @@
     --dark: #252525;
     --white: #f7f7f7;
     --sharp-color: #E888DF;
+    --green: #4CAF50;
+    --blue: #008CBA;
     --normal-spacing: 16px;
     --content-padding: 10%;
 }
@@ -554,10 +556,17 @@ label{
     font-size: 1.5rem !important;
 }
 
-em{
+em {
     font-style: italic;
     font-weight: bold;
-    color: var(--sharp-color);
+}
+
+.mind{
+    color: var(--blue);
+}
+
+.nature{
+    color: var(--green);
 }
 
 @media only screen and (max-width: 600px) {
