@@ -1,6 +1,8 @@
 # Weekend Escapism - Demo Site
 
-This project is a demo website designed to help users find weekend getaway destinations. It features interactive elements such as a dynamic gallery, filtering options, and detailed destination information.
+This project is a demo website designed to help users find weekend getaway destinations. It features interactive elements such as a dynamic gallery, filtering options, detailed destination information, and an interactive map.
+
+This project is the product of the **Introduction to Web Development** course by [MadLab](https://www.madlab.org.uk/) and [ShiftClick](https://shiftclick.uk/).
 
 ---
 
@@ -11,7 +13,14 @@ This project is a demo website designed to help users find weekend getaway desti
   - Filter destinations by distance, starting location, and activity tags.
 - **Destination Details**:
   - View detailed descriptions, weather info, and Google Maps links for each destination.
+- **Interactive Map**:
+  - Displays all destinations as markers on a map.
+  - Clickable markers show destination details and a link to Google Maps.
+- **Weather Integration**:
+  - Fetches real-time weather data for each destination using the Open-Meteo API.
 - **Responsive Design**: Optimized for both desktop and mobile devices.
+- **Dynamic Backgrounds**:
+  - Cards and sections dynamically update their background images based on destination data.
 
 ---
 
@@ -21,6 +30,7 @@ This project is a demo website designed to help users find weekend getaway desti
 - **CSS3**: For styling and layout, including responsive design.
 - **JavaScript (ES6)**: For interactivity and dynamic content generation.
 - **jQuery**: For DOM manipulation and event handling.
+- **Leaflet.js**: For rendering the interactive map.
 - **Google Fonts**: For typography.
 - **Open-Meteo API**: For fetching real-time weather data.
 
@@ -73,7 +83,18 @@ Demo-Site/
 - Add user reviews and ratings for destinations.
 - Integrate a weather forecast for multiple days.
 - Add a "Save to Favorites" feature for users.
-- Include an interactive map for better navigation.
+- Include an interactive timeline for destination highlights.
+- Add multi-language support for a wider audience.
+
+---
+
+## Credits
+
+This project was created as part of the **Introduction to Web Development** course by:
+- [MadLab](https://www.madlab.org.uk/)
+- [ShiftClick](https://shiftclick.uk/)
+
+Special thanks to the instructors and contributors for their guidance and support.
 
 ---
 
