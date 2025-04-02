@@ -65,7 +65,12 @@ nav {
 
 footer {
     text-align: center;
-    margin: 15%;
+    margin: var(--content-padding);
+}
+
+footer p {
+    display:flex;
+    gap: 1rem;
 }
 
 h1.fixed-h1 {
@@ -258,21 +263,38 @@ a {
     font-family: 'Inter';
 }
 
-.galleryImg {
-    object-fit: cover;
-    object-position: center;
-    flex: 0 0 auto; /* Prevent images from shrinking */
-    scroll-snap-align: start; /* Optional: for snap scrolling */
-    border-radius: 0.8rem;
+.galleryCard{
+    gap: 1rem;
+    padding: 1rem 0;
     position: relative;
-    border: #44465520 0.5px solid;
-    transition: filter 0.5s ease-in-out;
-    box-shadow: rgba(var(--dark), 0.50) 0px 30px 30px 0px;
-    margin-bottom: 2rem; /* Add margin to create space for the box-shadow */
-    width: fit-content;
-    max-width: 400px;
-    padding-bottom: 1rem;
+    min-height: 400px;
+    min-width: 300px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: local;
+    border-radius: 1rem;
+    color: var(--white);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
     cursor: pointer;
+}
+
+.galleryCard::before{
+    border-radius:1rem;
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3); /* Optional: to add a dark overlay for better text readability */
+    z-index: 0; /* Ensure overlay is below the content */
+}
+
+.galleryCard > a{
+    color:var(--white);
 }
 
 .galleryImg:hover img {
@@ -369,6 +391,13 @@ a {
     flex-wrap: wrap;
     padding: 0 1rem;
     font-size: 0.8rem;
+    position: relative;
+}
+
+.info > h4{
+    font-size: 1.5rem;
+    margin: 0;
+    font-family: 'lobster';
 }
 
 .rain {
@@ -491,6 +520,8 @@ label{
 
 .locationHref{
     color: var(--white);
+    display: flex;
+    cursor: pointer;
 }
 
 .locationHref > span{
@@ -522,6 +553,16 @@ em {
 
 .nature{
     color: var(--green);
+}
+
+#map {
+    height: 500px; /* Set the height of the map */
+    width: 100%; /* Full width */
+}
+
+#mapSection{
+    padding: 0 var(--content-padding);
+    min-height: fit-content;
 }
 
 @media only screen and (max-width: 600px) {

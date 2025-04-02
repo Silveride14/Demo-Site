@@ -3,6 +3,7 @@ import { postcode, nature } from './data.js';
 
 let galleryCollection = [];
 let tagsFilter = [];
+let currentLocation = `Manchester`;
 
 postcode.forEach((location) => {
     //if it is the first location, set it as the default location
@@ -25,27 +26,22 @@ function createGalleryCard(){
                 let loc = postcode.find((loc) => loc.name === `Manchester`);
                 //get distance selected destination
                 des.distance = haversineDistance(loc.lat, loc.lon, des.lat, des.lon);
-                let googleMap = `https://www.google.com/maps/search/?api=1&query=${des.name}`
                 let galleryCard = $('<div>', {
-                    class: 'galleryImg',
+                    class: 'galleryCard',
                     'data-name': des.name,
                     'data-distance': des.distance,
                     'data-temp': result.current.temperature_2m,
                     'data-rain': result.current.rain,
                     'data-lat': des.lat,
                     'data-lon': des.lon,
+                    css: {
+                        backgroundImage: `url(${des.src})`, // Set the background image dynamically
+                    },
                 }).append(
-                    $('<img>', {
-                        src: des.src,
-                        alt: des.name
-                    }),
                     $('<a>', {
                         class: 'info',
-                        href: googleMap,
-                        target: '_blank'
                     }).append(
                         $('<h4>').text(des.name),
-                        $('<span>', { class: 'material-symbols-outlined weather' }).text('near_me')
                     ),
                     $('<div>', { class: 'info' }).append(
                         $('<span>', { class: 'rain' }).append(
@@ -68,7 +64,7 @@ function createGalleryCard(){
             des.distance = haversineDistance(loc.lat, loc.lon, des.lat, des.lon);
             let googleMap = `https://www.google.com/maps/search/?api=1&query=${des.name}`
             let galleryCard = $('<div>', {
-                class: 'galleryImg',
+                class: 'galleryCard',
                 'data-name': des.name,
                 'data-distance': des.distance,
                 'data-lat': des.lat,
@@ -164,7 +160,7 @@ function sortGalleryByDistance(){
     galleryCollection.forEach((card) => {
         let distance = haversineDistance(loc.lat, loc.lon, card[0].getAttribute('data-lat'), card[0].getAttribute('data-lon'));
         card[0].setAttribute(`data-distance`, distance);
-        card[0].children[2].children[1].textContent = `${distance} miles`;
+        card[0].children[1].children[1].textContent = `${distance} miles`;
     });
     //change the distance text
     //sort the galleryCollection by distance
@@ -227,8 +223,9 @@ $('.pills').on('click', '.pill', function (e) {
 });
 
 // Attach a single event listener to the parent container
-$('#destinationGallery').on('click', '.galleryImg', function (e) {
+$('#destinationGallery').on('click', '.galleryCard', function (e) {
     showDestination(e);
+    currentLocation = e.currentTarget.dataset.name;
 });
 
 function showDestination(e) {
@@ -249,9 +246,9 @@ function showDestination(e) {
             <span>${card.data('temp')}°C</span>
             <span class="material-symbols-outlined weather">rainy</span>${card.data('rain')}mm
         </div>
-        <a href="https://www.google.com/maps/search/?api=1&query=${des.name}" target="_blank" class="locationHref">
+        <div class="locationHref">
             <h2>${des.location}</h2><span class="material-symbols-outlined weather">near_me</span>
-        </a>
+        </div>
         <h1>${des.name}</h1>
         <p>${des.description}</p>
     `);
@@ -262,3 +259,41 @@ function showDestination(e) {
         scrollTop: $('#desSection').offset().top
     }, 0);
 }
+
+// Initialize the map and set its view to a specific location and zoom level
+const map = L.map('map').setView([53.483959, -2.244644], 10); // Example: Manchester coordinates
+
+// Add OpenStreetMap tiles
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map);
+
+// Add a marker to the map
+const marker = L.marker([53.483959, -2.244644]).addTo(map);
+marker.bindPopup('<b>Manchester</b><br>Starting Point');
+
+// Loop through all destinations in the nature array and add markers to the map
+nature.forEach((des) => {
+    const marker = L.marker([des.lat, des.lon]).addTo(map);
+    marker.bindPopup(`
+        <b>${des.name}</b><br>
+        ${des.location}<br>
+        <a href="https://www.google.com/maps/search/?api=1&query=${des.name}" target="_blank">View on Google Maps</a>
+    `);
+});
+
+// locationHref on click change the map focus according to the location
+$('.content').on('click', '.locationHref', (e) => {
+    let loc = nature.find((des) => des.name === currentLocation);
+    map.setView([loc.lat, loc.lon], 10);
+    marker.setLatLng([loc.lat, loc.lon]);
+    marker.bindPopup(`
+        <b>${loc.name}</b><br>
+        ${loc.location}<br>
+        <a href="https://www.google.com/maps/search/?api=1&query=${loc.name}" target="_blank">View on Google Maps</a>
+    `).openPopup();
+    //jump to map
+    $('html, body').animate({
+        scrollTop: $('#map').offset().top
+    }, 0);
+});
