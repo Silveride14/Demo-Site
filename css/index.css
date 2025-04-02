@@ -574,8 +574,8 @@ em {
         font-size: 3rem;
     }
 
-    .galleryImg {
-        max-width: calc(100vw - 3rem);
+    .galleryCard {
+        width: calc(100vw - 3rem);
         margin-bottom: 1rem;
     }
 
