@@ -69,8 +69,11 @@ footer {
 }
 
 footer p {
+    justify-content: center;
     display:flex;
     gap: 1rem;
+    flex-direction: column;
+    align-items: center;
 }
 
 h1.fixed-h1 {
@@ -561,7 +564,7 @@ em {
 }
 
 #mapSection{
-    padding: 0 var(--content-padding);
+    padding: var(--content-padding);
     min-height: fit-content;
 }
 
