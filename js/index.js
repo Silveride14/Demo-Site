@@ -1,25 +1,5 @@
-const nature = [
-    {name: `Peak District`, src: `img/Img-1.jpeg`, lat: 53.3430, lon: -1.7722, tags: [`hiking`, `nature`, `mountains`, `scenic`]},
-    {name: `Lake District`, src: `img/Img-2.jpeg`, lat: 54.4609, lon: -3.0886, tags: [`lakes`, `nature`, `scenic`, `adventure`]},
-    {name: `Kinder Scout`, src: `img/Img-3.jpeg`, lat: 53.3848, lon: -1.8704, tags: [`hiking`, `adventure`, `nature`, `mountains`]},
-    {name: `Mam Tor`, src: `img/Img-4.jpeg`, lat: 53.3498, lon: -1.7745, tags: [`mountains`, `hiking`, `scenic`, `nature`]},
-    {name: `Formby Beach`, src: `img/Img-9.jpeg`, lat: 53.5534, lon: -3.0686, tags: [`beach`, `coastal`, `nature`, `family`]},
-    {name: `Alderley Edge`, src: `img/Img-10.jpeg`, lat: 53.3030, lon: -2.2360, tags: [`forest`, `hiking`, `scenic`, `nature`]},
-    {name: `Llandudno`, src: `img/IMG_9154.jpeg`, lat: 53.324238, lon: -3.827588, tags: [`coastal`, `scenic`, `nature`, `family`]},
-    {name: `Great Orme`, src: `img/IMG_9132.jpeg`, lat: 53.3286, lon: -3.8536, tags: [`hiking`, `nature`, `scenic`, `adventure`]},
-    {name: `St Tudno's Church`, src: `img/IMG_9149.jpeg`, lat: 53.3286, lon: -3.8536, tags: [`historic`, `architecture`, `scenic`, `culture`]},
-    {name: `North Wales`, src: `img/IMG_9123.jpeg`, lat: 53.324238, lon: -3.827588, tags: [`nature`, `scenic`, `adventure`, `family`]},
-    {name: `Dovestone Reservoir`, src: `img/Img-5.jpeg`, lat: 53.5333, lon: -1.9833, tags: [`lakes`, `hiking`, `nature`, `scenic`]},
-    {name: `Rivington Pike`, src: `img/Img-6.jpeg`, lat: 53.6214, lon: -2.5706, tags: [`hiking`, `scenic`, `adventure`, `nature`]},
-    {name: `Tatton Park`, src: `img/Img-7.jpeg`, lat: 53.3308, lon: -2.3876, tags: [`park`, `nature`, `family`, `historic`]},
-    {name: `Delamere Forest`, src: `img/Img-8.jpeg`, lat: 53.2280, lon: -2.6930, tags: [`forest`, `hiking`, `nature`, `adventure`]},
-];
-
-const postcode = [
-    {name: `Manchester`, lat: 53.483959, lon: -2.244644}, 
-    {name: `Liverpool`, lat: 53.408371, lon: -2.991573},
-    {name: `Chester`, lat: 53.190887, lon: -2.891305},
-]
+//import the nature data
+import { postcode, nature } from './data.js';
 
 let galleryCollection = [];
 let tagsFilter = [];
@@ -53,7 +33,7 @@ function createGalleryCard(){
                     'data-temp': result.current.temperature_2m,
                     'data-rain': result.current.rain,
                     'data-lat': des.lat,
-                    'data-lon': des.lon
+                    'data-lon': des.lon,
                 }).append(
                     $('<img>', {
                         src: des.src,
@@ -230,6 +210,8 @@ function filterByTag(e){
         tagsFilter.forEach((tag) => {
             if(!tags.includes(tag)){
                 show = false;
+            } else {
+                show = true;
             }
         });
         if(show){
@@ -238,4 +220,38 @@ function filterByTag(e){
             card[0].style.display = `none`;
         }
     });
+}
+
+// Attach a single event listener to the parent container
+$('#destinationGallery').on('click', '.galleryImg', function (e) {
+    showDestination(e);
+});
+
+function showDestination(e) {
+    // Get the clicked element
+    let card = $(e.currentTarget); // Use jQuery to wrap the clicked element
+    let name = card.data('name'); // Get the data-name attribute
+    let des = nature.find((des) => des.name === name); // Find the corresponding data in the nature array
+
+    // Update the background image of #desSection
+    $('#desSection').css('background-image', `url(${des.src})`);
+
+    // Update the content of #desSection with destination details
+    $('#desSection .content').html(`
+        <div class="weather-info">
+            <span>${card.data('temp')}°C</span>
+            <span class="material-symbols-outlined weather">rainy</span>${card.data('rain')}mm
+        </div>
+        <a href="https://www.google.com/maps/search/?api=1&query=${des.name}" target="_blank" class="locationHref">
+            <h2>${des.location}</h2><span class="material-symbols-outlined weather">near_me</span>
+        </a>
+        <h1>${des.name}</h1>
+        <p>${des.description}</p>
+    `);
+    // Show the #desSection
+    $('#desSection').css('display', 'flex');
+    //scroll to the #desSection
+    $('html, body').animate({
+        scrollTop: $('#desSection').offset().top
+    }, 0);
 }
