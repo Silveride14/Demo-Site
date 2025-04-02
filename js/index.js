@@ -3,6 +3,7 @@ import { postcode, nature } from './data.js';
 
 let galleryCollection = [];
 let tagsFilter = [];
+let currentLocation = `Manchester`;
 
 postcode.forEach((location) => {
     //if it is the first location, set it as the default location
@@ -41,11 +42,8 @@ function createGalleryCard(){
                     }),
                     $('<a>', {
                         class: 'info',
-                        href: googleMap,
-                        target: '_blank'
                     }).append(
                         $('<h4>').text(des.name),
-                        $('<span>', { class: 'material-symbols-outlined weather' }).text('near_me')
                     ),
                     $('<div>', { class: 'info' }).append(
                         $('<span>', { class: 'rain' }).append(
@@ -229,6 +227,7 @@ $('.pills').on('click', '.pill', function (e) {
 // Attach a single event listener to the parent container
 $('#destinationGallery').on('click', '.galleryImg', function (e) {
     showDestination(e);
+    currentLocation = e.currentTarget.dataset.name;
 });
 
 function showDestination(e) {
@@ -249,9 +248,9 @@ function showDestination(e) {
             <span>${card.data('temp')}°C</span>
             <span class="material-symbols-outlined weather">rainy</span>${card.data('rain')}mm
         </div>
-        <a href="https://www.google.com/maps/search/?api=1&query=${des.name}" target="_blank" class="locationHref">
+        <div class="locationHref">
             <h2>${des.location}</h2><span class="material-symbols-outlined weather">near_me</span>
-        </a>
+        </div>
         <h1>${des.name}</h1>
         <p>${des.description}</p>
     `);
@@ -273,7 +272,7 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 
 // Add a marker to the map
 const marker = L.marker([53.483959, -2.244644]).addTo(map);
-marker.bindPopup('<b>Manchester</b><br>Starting Point').openPopup();
+marker.bindPopup('<b>Manchester</b><br>Starting Point');
 
 // Loop through all destinations in the nature array and add markers to the map
 nature.forEach((des) => {
@@ -283,4 +282,20 @@ nature.forEach((des) => {
         ${des.location}<br>
         <a href="https://www.google.com/maps/search/?api=1&query=${des.name}" target="_blank">View on Google Maps</a>
     `);
+});
+
+// locationHref on click change the map focus according to the location
+$('.content').on('click', '.locationHref', (e) => {
+    let loc = nature.find((des) => des.name === currentLocation);
+    map.setView([loc.lat, loc.lon], 10);
+    marker.setLatLng([loc.lat, loc.lon]);
+    marker.bindPopup(`
+        <b>${loc.name}</b><br>
+        ${loc.location}<br>
+        <a href="https://www.google.com/maps/search/?api=1&query=${loc.name}" target="_blank">View on Google Maps</a>
+    `).openPopup();
+    //jump to map
+    $('html, body').animate({
+        scrollTop: $('#map').offset().top
+    }, 0);
 });

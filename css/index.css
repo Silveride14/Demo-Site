@@ -65,7 +65,12 @@ nav {
 
 footer {
     text-align: center;
-    margin: 15%;
+    margin: var(--content-padding);
+}
+
+footer p {
+    display:flex;
+    gap: 1rem;
 }
 
 h1.fixed-h1 {
@@ -491,6 +496,8 @@ label{
 
 .locationHref{
     color: var(--white);
+    display: flex;
+    cursor: pointer;
 }
 
 .locationHref > span{
@@ -531,6 +538,7 @@ em {
 
 #mapSection{
     padding: 0 var(--content-padding);
+    min-height: fit-content;
 }
 
 @media only screen and (max-width: 600px) {
