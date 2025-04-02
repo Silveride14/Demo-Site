@@ -242,6 +242,9 @@ function showDestination(e) {
 
     // Update the content of #desSection with destination details
     $('#desSection .content').html(`
+        <div class="tags">
+            ${des.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+        </div>
         <div class="weather-info">
             <span>${card.data('temp')}°C</span>
             <span class="material-symbols-outlined weather">rainy</span>${card.data('rain')}mm
