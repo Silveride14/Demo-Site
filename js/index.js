@@ -211,7 +211,7 @@ function filterByTag(e){
             }
         });
         if(show){
-            card[0].style.display = `block`;
+            card[0].style.display = `flex`;
         } else {
             card[0].style.display = `none`;
         }
