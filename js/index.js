@@ -26,20 +26,18 @@ function createGalleryCard(){
                 let loc = postcode.find((loc) => loc.name === `Manchester`);
                 //get distance selected destination
                 des.distance = haversineDistance(loc.lat, loc.lon, des.lat, des.lon);
-                let googleMap = `https://www.google.com/maps/search/?api=1&query=${des.name}`
                 let galleryCard = $('<div>', {
-                    class: 'galleryImg',
+                    class: 'galleryCard',
                     'data-name': des.name,
                     'data-distance': des.distance,
                     'data-temp': result.current.temperature_2m,
                     'data-rain': result.current.rain,
                     'data-lat': des.lat,
                     'data-lon': des.lon,
+                    css: {
+                        backgroundImage: `url(${des.src})`, // Set the background image dynamically
+                    },
                 }).append(
-                    $('<img>', {
-                        src: des.src,
-                        alt: des.name
-                    }),
                     $('<a>', {
                         class: 'info',
                     }).append(
@@ -66,7 +64,7 @@ function createGalleryCard(){
             des.distance = haversineDistance(loc.lat, loc.lon, des.lat, des.lon);
             let googleMap = `https://www.google.com/maps/search/?api=1&query=${des.name}`
             let galleryCard = $('<div>', {
-                class: 'galleryImg',
+                class: 'galleryCard',
                 'data-name': des.name,
                 'data-distance': des.distance,
                 'data-lat': des.lat,
@@ -162,7 +160,7 @@ function sortGalleryByDistance(){
     galleryCollection.forEach((card) => {
         let distance = haversineDistance(loc.lat, loc.lon, card[0].getAttribute('data-lat'), card[0].getAttribute('data-lon'));
         card[0].setAttribute(`data-distance`, distance);
-        card[0].children[2].children[1].textContent = `${distance} miles`;
+        card[0].children[1].children[1].textContent = `${distance} miles`;
     });
     //change the distance text
     //sort the galleryCollection by distance
@@ -225,7 +223,7 @@ $('.pills').on('click', '.pill', function (e) {
 });
 
 // Attach a single event listener to the parent container
-$('#destinationGallery').on('click', '.galleryImg', function (e) {
+$('#destinationGallery').on('click', '.galleryCard', function (e) {
     showDestination(e);
     currentLocation = e.currentTarget.dataset.name;
 });
