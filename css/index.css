@@ -67,7 +67,7 @@ nav > ul > li > a {
     height: 100%; /* Full height */
     overflow: auto; /* Enable scroll if needed */
     background-color: rgba(0,0,0,0.7); /* Black w/ opacity */
-    z-index: 1000;
+    z-index: 900;
     display:none;
 }
 
@@ -232,7 +232,7 @@ a {
 #topSection h1 {
     position: sticky; /* Sticky within the #topSection */
     top: 10%; /* Adjust the top offset */
-    z-index: 10; /* Ensure it stays above other content */
+    z-index: 1000; /* Ensure it stays above other content */
     font-size: 5rem;
     margin: 0;
     font-family: "Lobster", sans-serif;
@@ -242,6 +242,51 @@ a {
     text-shadow: 5px 2px 2px var(--dark);
 }
 
+#desSection {
+    position: relative;
+    background-image: url('../img/tatton-park.jpeg'); /* Adjust the path if necessary */
+    width: 100%;
+    height: 100vh; /* Full viewport height */
+    display: none;
+    align-items: flex-end;;
+    justify-content: center;
+    color: var(--white);
+    text-align: center; /* Optional: to center text */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#desSection .content {
+    position: relative;
+    z-index: 1; /* Ensure content is above the background */
+    padding: 5%;
+    text-align: left;
+}
+
+#desSection::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Optional: to add a dark overlay for better text readability */
+    z-index: 0; /* Ensure overlay is below the content */
+}
+
+#desSection h1 {
+    top: 10%; /* Adjust the top offset */
+    z-index: 1000; /* Ensure it stays above other content */
+    font-size: 5rem;
+    margin: 0;
+    font-family: "Lobster", sans-serif;
+    color: var(--sharp-color);
+    line-height: 5.5rem;
+    transition: all 0.3s ease-in-out; /* Smooth transition for position change */
+}
+
 .gallery-container {
     scroll-padding-top: 5rem;
     max-width: 100vw;
@@ -249,6 +294,7 @@ a {
     padding-left: var(--content-padding);
     padding-right: var(--content-padding);
     padding-bottom: 2rem; /* Add padding to create space for the box-shadow */
+    scroll-padding-top: 5rem;
 }
 
 .gallery {
@@ -491,6 +537,23 @@ label{
     background: #E888DF60;
 }
 
+.locationHref{
+    color: var(--white);
+}
+
+.locationHref > span{
+    font-size: 1.5rem !important;
+    color: var(--white);
+}
+
+#desSection > .content > .weather-info{
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+#desSection > .content > .weather-info >.material-symbols-outlined{
+    font-size: 1.5rem !important;
+}
+
 @media only screen and (max-width: 600px) {
     html {
         font-size: 14px;
@@ -523,5 +586,9 @@ label{
 
     .gallery{
         flex-wrap: wrap;
+    }
+
+    #desSection h1{
+        font-size: 3rem;
     }
 }
