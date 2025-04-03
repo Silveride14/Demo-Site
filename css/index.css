@@ -292,7 +292,7 @@ a {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.3); /* Optional: to add a dark overlay for better text readability */
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 70%, rgba(0, 0, 0, 0.7) 100%);
     z-index: 0; /* Ensure overlay is below the content */
 }
 
