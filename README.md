@@ -1,4 +1,5 @@
 # Weekend Escapism
+https://silveride14.github.io/Demo-Site
 
 This project is a demo website designed to help users find weekend getaway destinations. It features interactive elements such as a dynamic gallery, filtering options, detailed destination information, and an interactive map.
 
